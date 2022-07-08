@@ -1,0 +1,15 @@
+name: Cleanup PR docker image
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  clean-docker-image:
+    runs-on: [self-hosted]
+    steps:
+      - uses: jfrog/setup-jfrog-cli@v2
+        env:
+          JF_ARTIFACTORY_1: ${{ secrets.JFROG_ARTIFACTORY_CLI_CONFIG }}
+      - run: |
+          jfrog rt del "docker-snapshot-local/bonita-subscription/*-web-PR-${{ github.event.number }}"

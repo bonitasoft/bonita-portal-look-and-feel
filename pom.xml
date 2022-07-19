@@ -3,15 +3,14 @@
     <groupId>org.bonitasoft.console</groupId>
     <artifactId>bonita-portal-look-and-feel</artifactId>
     <name>Web looknfeel</name>
-    <packaging>jar</packaging>
-    <version>1.0.1-SNAPSHOT</version>
-
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <description>Bonita look and feel used by Bonita portal.</description>
     <scm>
         <developerConnection>scm:git:https://github.com/bonitasoft/bonita-portal-look-and-feel.git</developerConnection>
         <url>https://github.com/bonitasoft/bonita-portal-look-and-feel</url>
         <connection>scm:git:https://github.com/bonitasoft/bonita-portal-look-and-feel.git</connection>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
 
     <distributionManagement>
         <!-- Central Repository -->
@@ -24,7 +23,17 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+    <url>https://www.bonitasoft.com/</url>
 
+    <developers>
+        <developer>
+            <id>bonitasoft</id>
+            <name>Bonitasoft</name>
+            <email>rd.user@bonitasoft.com</email>
+            <organization>Bonitasoft</organization>
+            <organizationUrl>https://www.bonitasoft.com</organizationUrl>
+        </developer>
+    </developers>
     <licenses>
         <license>
             <name>GPL-v2.0</name>

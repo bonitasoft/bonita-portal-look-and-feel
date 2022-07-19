@@ -56,7 +56,6 @@ jobs:
           body: Release ${{ steps.newTagVersion.outputs.value }} (${{ env.releaseDate}})
           prerelease: true
           token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-
       # repository-dispatch event will call always on default branch ('dev' in our case)
       - name: Publish artefact
         if: ${{ success() && github.event.inputs.publishBinaries == 'true'}}

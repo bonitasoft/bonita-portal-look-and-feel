@@ -11,64 +11,37 @@ on:
         description: true to Publish binaries
         required: true
         default: true
-      pushToPublic:
-        description: true to push on public repository
-        required: true
-        default: false
+
 jobs:
   createGithubRelease:
     name: Create release
     runs-on: ubuntu-latest
     steps:
-      - name: Setup checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Get tag version
-        id: newTagVersion
-        shell: bash
-        run: |
-          if [ ${{ github.event.inputs.version }} = '--next-patch' ]
-          then
-              echo "##[set-output name=value;]$(echo $(./infrastructure/next-patch-version.sh))"
-          else
-              echo "##[set-output name=value;]$(echo ${{ github.event.inputs.version }})"
-          fi
-      - name: Update Version
-        shell: bash
-        run: |
-          ./infrastructure/update-version.sh ${{ steps.newTagVersion.outputs.value }}
-          git commit -a -m "other(${{ steps.newTagVersion.outputs.value }}) prepare release ${{ steps.newTagVersion.outputs.value }}" && git tag -a ${{ steps.newTagVersion.outputs.value}} -m "Release ${{ steps.newTagVersion.outputs.value }}"
-          git push --tags
-          echo "releaseDate=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
-      - name: Push public dev tag
-        if: ${{ github.ref != 'refs/heads/master' && github.event.inputs.pushToPublic == 'true'}}
-        shell: bash
-        run: |
-          git config remote.public.url >&- || git remote add public https://github.com/bonitasoft/bonita-portal-look-and-feel.git
-          git push public ${{ steps.newTagVersion.outputs.value}}
-      - name: Create Release
-        uses: ncipollo/release-action@v1
-        id: create_release
-        with:
-          tag: ${{ steps.newTagVersion.outputs.value }}
-          name: Release ${{ steps.newTagVersion.outputs.value }}
-          body: Release ${{ steps.newTagVersion.outputs.value }} (${{ env.releaseDate}})
-          prerelease: true
-          token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      # repository-dispatch event will call always on default branch ('dev' in our case)
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Publish artefact
-        if: ${{ success() && github.event.inputs.publishBinaries == 'true'}}
-        uses: peter-evans/repository-dispatch@v1
+      - name: Setup Java
+        uses: actions/setup-java@v3
         with:
-          event-type: github-publish
-          client-payload: '{"ref":"${{ github.ref }}", "releaseVersion": "${{ steps.newTagVersion.outputs.value }}"}'
+          distribution: 'temurin'
+          java-version: 11
+          cache: 'maven'
+          server-id: ossrh # Value of the distributionManagement/repository/id field of the pom.xml
+          server-username: MAVEN_USERNAME # env variable for username in deploy
+          server-password: MAVEN_CENTRAL_TOKEN # env variable for token in deploy
+          gpg-private-key: ${{ secrets.gpg_private_key }} # Value of the GPG private key to import
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
+      - name: Configure Git user
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+      - name: Build Release
+        run: ./mvnw --batch-mode release:prepare -DreleaseVersion=${{ github.event.inputs.version }}
 
-#      - name: Send message to Slack channel
-#        if: ${{ failure() }}
-#        uses: bonitasoft/actions/packages/notify-slack@1.1.0
-#        with:
-#          CHANNEL_ID: ${{ secrets.SLACK_UID_CHANNEL_ID }}
-#          MESSAGE: ":x: :scream: UI-Designer release ${{ steps.newTagVersion.outputs.value }} failed."
-#          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      - name: Publish
+        env:
+          GITHUB_TOKEN: ${{ inputs.github-token }}
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: mvn --batch-mode release:perform

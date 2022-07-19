@@ -1,15 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.bonitasoft.console</groupId>
     <artifactId>bonita-portal-look-and-feel</artifactId>
     <name>Web looknfeel</name>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <scm>
-        <developerConnection>scm:git:git@github.com:bonitasoft/bonita-portal-look-and-feel.git</developerConnection>
-        <url>scm:git:git@github.com:bonitasoft/bonita-portal-look-and-feel.git</url>
+        <developerConnection>scm:git:https://github.com/bonitasoft/bonita-portal-look-and-feel.git</developerConnection>
+        <url>https://github.com/bonitasoft/bonita-portal-look-and-feel</url>
+        <connection>scm:git:https://github.com/bonitasoft/bonita-portal-look-and-feel.git</connection>
     </scm>
 
     <distributionManagement>
@@ -23,6 +23,13 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+
+    <licenses>
+        <license>
+            <name>GPL-v2.0</name>
+            <url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+        </license>
+    </licenses>
 
     <properties>
         <output.directory>${project.build.directory}/${project.build.finalName}</output.directory>
@@ -109,7 +116,7 @@
         <profile>
             <id>release</id>
             <properties>
-                <maven.javadoc.skip>false</maven.javadoc.skip>
+                <maven.javadoc.skip>true</maven.javadoc.skip>
             </properties>
             <build>
                 <plugins>

@@ -4,13 +4,13 @@
     <artifactId>bonita-portal-look-and-feel</artifactId>
     <name>Web looknfeel</name>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
 
     <scm>
         <developerConnection>scm:git:https://github.com/bonitasoft/bonita-portal-look-and-feel.git</developerConnection>
         <url>https://github.com/bonitasoft/bonita-portal-look-and-feel</url>
         <connection>scm:git:https://github.com/bonitasoft/bonita-portal-look-and-feel.git</connection>
-      <tag>bonita-portal-look-and-feel-1.0.0</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <distributionManagement>

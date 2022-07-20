@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.bonitasoft.console</groupId>
     <artifactId>bonita-portal-look-and-feel</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <name>Web looknfeel</name>
@@ -213,6 +213,6 @@
         <developerConnection>scm:git:https://github.com/bonitasoft/bonita-portal-look-and-feel.git</developerConnection>
         <url>https://github.com/bonitasoft/bonita-portal-look-and-feel</url>
         <connection>scm:git:https://github.com/bonitasoft/bonita-portal-look-and-feel.git</connection>
-        <tag>HEAD</tag>
+        <tag>1.0.2</tag>
     </scm>
 </project>

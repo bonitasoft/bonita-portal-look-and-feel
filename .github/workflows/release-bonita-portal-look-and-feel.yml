@@ -5,12 +5,7 @@ on:
     inputs:
       version:
         description: new version to release (keep --next-path to bump version)
-        default: --next-patch
         required: true
-      publishBinaries:
-        description: true to Publish binaries
-        required: true
-        default: true
 
 jobs:
   createGithubRelease:

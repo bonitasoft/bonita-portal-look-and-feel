@@ -39,3 +39,19 @@ jobs:
           MAVEN_CENTRAL_TOKEN: ${{ secrets.OSSRH_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: mvn --batch-mode release:perform
+      - name: Get current date
+        id: date
+        shell: bash
+        run: |
+          echo "releaseDate=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.event.inputs.version }}
+          release_name: Release ${{ github.event.inputs.version }}
+          body: Release ${{ github.event.inputs.version }} (${{ env.releaseDate}})
+          draft: false
+          prerelease: false

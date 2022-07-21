@@ -2,35 +2,31 @@ name: Build
 
 on:
   push:
-    branches:
-      - dev
-      - master
-      - release-*
-      - 1.*
-  pull_request:
-    branches:
-      - dev
-      - master
-      - release-*
-      - 1.*
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    branches: [ main ]
 
 jobs:
   build:
-    runs-on: [self-hosted]
-
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 11
+          cache: 'maven'
+          server-id: ossrh # Value of the distributionManagement/repository/id field of the pom.xml
+          server-username: MAVEN_USERNAME # env variable for username in deploy
+          server-password: MAVEN_CENTRAL_TOKEN # env variable for token in deploy
+          gpg-private-key: ${{ secrets.gpg_private_key }} # Value of the GPG private key to import
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
 
-      - name: Build and tests
-        run: ./mvnw -B clean verify -Pe2e,integration-test
+      - name: Build and deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          MAVEN_USERNAME: ${{ secrets.ossrh_username }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.ossrh_password }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.gpg_passphrase }}
+        run: ./mvnw -B -ntp clean deploy
 
-#      - name: Send message to Slack channel
-#        if: ${{ failure() && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/master') }}
-#        uses: ./.github/actions/notify-slack
-#        with:
-#          CHANNEL_ID: ${{ secrets.SLACK_UID_CHANNEL_ID }}
-#          MESSAGE: ":x: Build on branch ${{github.ref}} failed in bonita portal look and feel."
-#          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

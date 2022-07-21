@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: new version to release (keep --next-path to bump version)
+        description: new version to release
         required: true
 
 jobs:

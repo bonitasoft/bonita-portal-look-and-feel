@@ -232,8 +232,8 @@
     </distributionManagement>
     <scm>
         <developerConnection>scm:git:https://github.com/bonitasoft/bonita-portal-look-and-feel.git</developerConnection>
-        <url>https://github.com/bonitasoft/bonita-portal-look-and-feel</url>
         <connection>scm:git:https://github.com/bonitasoft/bonita-portal-look-and-feel.git</connection>
+        <url>https://github.com/bonitasoft/bonita-portal-look-and-feel</url>
         <tag>HEAD</tag>
     </scm>
 </project>

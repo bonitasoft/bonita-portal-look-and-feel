@@ -166,7 +166,6 @@
                             <appendAssemblyId>true</appendAssemblyId>
                             <descriptors>
                                 <descriptor>assemblyCSS.xml</descriptor>
-                                <descriptor>assemblyLESS.xml</descriptor>
                             </descriptors>
                         </configuration>
                         <executions>
@@ -201,7 +200,6 @@
                             <appendAssemblyId>true</appendAssemblyId>
                             <descriptors>
                                 <descriptor>assemblyCSS.xml</descriptor>
-                                <descriptor>assemblyLESS.xml</descriptor>
                             </descriptors>
                         </configuration>
                         <executions>

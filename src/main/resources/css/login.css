@@ -77,6 +77,9 @@ h1, h2, h3, h4, h5, h6 {
   width: 10rem;
   height: 10rem;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #logo img {
   max-width: 100%;

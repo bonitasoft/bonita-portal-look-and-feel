@@ -1,5 +1,15 @@
 /* CSS file used by login.jsp */
 
+:root {
+  --color-text: #36302C;
+  --color-heading: #101010;
+  --color-page-bg: #F3F3F1;
+  --color-white: #ffffff;
+  --color-border: #E0E0E0;
+  --color-primary: #5C1932;
+  --color-primary-hover: #723253;
+}
+
 /* Eric Meyer's Reset CSS v2.0 - https://meyerweb.com/eric/tools/css/reset/reset.css */
 a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
 
@@ -21,7 +31,7 @@ a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,c
 
 html {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #6e6f6b;
+  color: var(--color-text);
   font-size: 14px;
 }
 html, body {
@@ -32,16 +42,16 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 #LoginPage {
-  background-color: #f9f9f9;
+  background-color: var(--color-page-bg);
   display: flex;
   flex-direction: column;
 }
 #LoginPage #LoginHeader {
-  background: #dd0033;
+  background: var(--color-primary);
   padding: 10px 0;
 }
 #LoginPage #LoginHeader h1 {
-  color: #ffffff;
+  color: var(--color-white);
   text-align: center;
 }
 #LoginPage #LoginHeader h1 span {
@@ -57,11 +67,11 @@ h1, h2, h3, h4, h5, h6 {
 #LoginPage #LoginFormContainer {
   overflow: hidden;
   margin: 0 auto;
-  background: #ffffff;
+  background: var(--color-white);
   width: 100%;
   padding: 20px;
   border-radius: 5px;
-  border: 1px solid #d8dee2;
+  border: 1px solid var(--color-border);
 }
 #LoginPage #LoginFormContainer #logo {
   width: 10rem;
@@ -73,7 +83,7 @@ h1, h2, h3, h4, h5, h6 {
   height: auto;
 }
 #LoginPage #LoginFormContainer p.error {
-  color: #dd0033;
+  color: var(--color-primary);
   font-size: 12px;
 }
 #LoginPage #LoginFormContainer > .body .header {
@@ -94,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
 #LoginPage #LoginFormContainer > .body .formentry .input input[type=text],
 #LoginPage #LoginFormContainer > .body .formentry .input input[type=password] {
   line-height: 35px;
-  border: 1px solid #dedcdc;
+  border: 1px solid var(--color-border);
   width: 100%;
   box-sizing: border-box;
   padding: 0 30px 0 10px;
@@ -111,12 +121,12 @@ h1, h2, h3, h4, h5, h6 {
   text-align: right;
 }
 #LoginPage #LoginFormContainer > .body .formactions input[type="submit"] {
-  color: #ffffff;
+  color: var(--color-white);
   padding: 5px 10px;
   width: 100%;
   -webkit-appearance: none;
-  outline-color: #ff1148;
-  border: 1px solid #dd0033;
+  outline-color: var(--color-primary-hover);
+  border: 1px solid var(--color-primary);
   text-transform: uppercase;
   font-family: "Signika-Semibold", sans-serif;
   font-size: 100%;
@@ -128,7 +138,7 @@ h1, h2, h3, h4, h5, h6 {
   display: inline-block;
   white-space: nowrap;
   user-select: none;
-  background: #dd0033;
+  background: var(--color-primary);
   overflow: hidden;
   zoom: 1;
   cursor: pointer;
@@ -145,14 +155,14 @@ h1, h2, h3, h4, h5, h6 {
 #LoginPage #LoginFormContainer > .body .formactions button:active,
 #LoginPage #LoginFormContainer > .body .formactions input[type="submit"]:active,
 #LoginPage #LoginFormContainer > .body .formactions input[type="button"]:active {
-  color: #ffffff;
-  background-color: #aa0027;
-  border-color: #a00025;
+  color: var(--color-white);
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
 }
 
 @media (min-width: 640px) {
   #LoginPage #LoginFormContainer > .body {
-    border-left: 1px solid #e4e4e4;
+    border-left: 1px solid var(--color-border);
     width: 220px;
     padding: 0 0 0 25px;
     float: left;
@@ -181,7 +191,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   #LoginPage #LoginFormContainer > .body .header h2 {
-    color: #2c3e50;
+    color: var(--color-heading);
     text-align: right;
   }
 

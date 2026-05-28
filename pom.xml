@@ -34,7 +34,7 @@
         <wro4j.version>1.7.0</wro4j.version>
         <central-maven-plugin.version>0.8.0</central-maven-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
         <maven.compiler.release>11</maven.compiler.release>
     </properties>
 
